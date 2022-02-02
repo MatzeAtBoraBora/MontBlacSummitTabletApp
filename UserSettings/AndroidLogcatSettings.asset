@@ -1,0 +1,155 @@
+{
+    "m_SelectedDeviceId": "CPHJ0BG48",
+    "m_SelectedPackage": {
+        "deviceId": "CPHJ0BG48",
+        "name": "com.DefaultCompany.SummitApps",
+        "processId": 20379,
+        "exited": false
+    },
+    "m_SelectedPriority": 0,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 12705,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 12995,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 13201,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 15330,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 17298,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 18089,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 18272,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 18475,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 18669,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 19083,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 19647,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 19864,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 20066,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 20379,
+            "exited": false
+        },
+        {
+            "deviceId": "b3f53b9",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 18161,
+            "exited": false
+        }
+    ],
+    "m_Tags": {
+        "m_Entries": [
+            {
+                "m_Name": "Filter by all listed tags",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "No Filter",
+                "m_Selected": true
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Tag Control...",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Unity",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "CRASH",
+                "m_Selected": false
+            }
+        ]
+    },
+    "m_MemoryViewerState": {
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "MemoryGroup": 2,
+        "Behavior": 0
+    },
+    "m_Filter": "",
+    "m_FilterIsRegularExpression": false,
+    "m_SymbolPaths": []
+}
