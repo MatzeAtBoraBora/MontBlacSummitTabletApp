@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "CPHJ0BG48",
         "name": "com.DefaultCompany.SummitApps",
-        "processId": 20379,
+        "processId": 24262,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -93,9 +93,45 @@
             "exited": false
         },
         {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 22833,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 24262,
+            "exited": false
+        },
+        {
             "deviceId": "b3f53b9",
             "name": "com.DefaultCompany.SummitApps",
             "processId": 18161,
+            "exited": false
+        },
+        {
+            "deviceId": "b3f53b9",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 14462,
+            "exited": false
+        },
+        {
+            "deviceId": "b3f53b9",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 14908,
+            "exited": false
+        },
+        {
+            "deviceId": "b3f53b9",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 15651,
+            "exited": false
+        },
+        {
+            "deviceId": "b3f53b9",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 29562,
             "exited": false
         }
     ],

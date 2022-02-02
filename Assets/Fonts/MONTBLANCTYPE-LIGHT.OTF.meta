@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 6fa509fa23557fc4d902585980863606
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Montblanc Type
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 68ed5fce2c29c36429ae813f244f9875, type: 3}
+  - {fileID: 12800000, guid: 32820670f5987bf4abdf3841ab1a5375, type: 3}
+  - {fileID: 12800000, guid: 5290dd55a1c6731459b4b1bc06b723e1, type: 3}
+  - {fileID: 12800000, guid: 0076892d934fb6c4bb32d2427f8adc6a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
