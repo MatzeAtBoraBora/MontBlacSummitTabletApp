@@ -568,7 +568,7 @@ PlayerSettings:
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
   cameraUsageDescription: 
-  locationUsageDescription: 
+  locationUsageDescription: none
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
   switchNMETAOverride: 
