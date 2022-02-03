@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "CPHJ0BG48",
         "name": "com.DefaultCompany.SummitApps",
-        "processId": 24262,
+        "processId": 24697,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -102,6 +102,12 @@
             "deviceId": "CPHJ0BG48",
             "name": "com.DefaultCompany.SummitApps",
             "processId": 24262,
+            "exited": false
+        },
+        {
+            "deviceId": "CPHJ0BG48",
+            "name": "com.DefaultCompany.SummitApps",
+            "processId": 24697,
             "exited": false
         },
         {

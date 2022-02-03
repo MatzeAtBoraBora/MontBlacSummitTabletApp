@@ -232,7 +232,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 
 			case "ButtonSendTestData":
 				{
-					byte[] bytes = System.Text.Encoding.UTF8.GetBytes("Hello from Client:"+isClient);
+					byte[] bytes = System.Text.Encoding.UTF8.GetBytes("Hello "+ UnityEngine.Random.Range(0, 100) + "from Client:"+isClient);
 
 					if (isServer)
 					{
@@ -282,6 +282,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	private void ReadOutBytes(byte[] bytes) {
 		ServerOutputText.text = "Getting Bytes in!";
 		String bytesAsString = System.Text.Encoding.UTF8.GetString(bytes);
+		ServerOutputText.text = bytesAsString;
 		OnMessageReceived.Invoke(bytesAsString);
 	}
 	public void OnApplicationQuit()
