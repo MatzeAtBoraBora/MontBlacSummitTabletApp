@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class AnimationPanelController : MonoBehaviour {
+    public bool isChapterStart = false;
+
     public GameObject[] backgroundElements;
     public GameObject[] typoElements;
     public float sequenceDelay = 0.5f;
@@ -25,20 +28,21 @@ public class AnimationPanelController : MonoBehaviour {
         
     }
 
-    public void showElements() {
+    public void ShowElements() {
         this.GetComponent<CanvasGroup>().DOFade(1, 0f);
-        fadeInBackground();
-        fadeInTypo();
-        fadeInDelayed();
+        FadeInBackground();
+        FadeInTypo();
+        FadeInDelayed();
 
     }
 
-    public void hideElements()
+    public async Task HideElements()
     {
-        fadeOutSelf();
+        await FadeOutSelf();
+
     }
 
-    public void fadeInBackground()
+    public void FadeInBackground()
     {
         foreach (GameObject element in backgroundElements)
         {
@@ -53,7 +57,7 @@ public class AnimationPanelController : MonoBehaviour {
         }
     }
 
-    public void fadeInTypo()
+    public void FadeInTypo()
     {
         int index = 1;
         foreach (GameObject element in typoElements)
@@ -70,7 +74,7 @@ public class AnimationPanelController : MonoBehaviour {
         }
     }
 
-    public void fadeInDelayed()
+    public void FadeInDelayed()
     {
         foreach (GameObject element in delayedElements)
         {
@@ -86,12 +90,12 @@ public class AnimationPanelController : MonoBehaviour {
         }
     }
 
-    public void fadeOutSelf()
+    public async Task FadeOutSelf()
     {
-        this.GetComponent<CanvasGroup>().DOFade(0, fadeOutSpeed);
+       await this.GetComponent<CanvasGroup>().DOFade(0, fadeOutSpeed).AsyncWaitForCompletion();
     }
 
-    public void fadeOutAll()
+    public void FadeOutAll()
     {
         foreach (GameObject element in backgroundElements)
         {

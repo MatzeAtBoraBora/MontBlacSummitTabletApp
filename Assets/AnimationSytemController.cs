@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Threading.Tasks;
+using System.Linq;
+using System;
 
 public class AnimationSytemController : MonoBehaviour
 {
     public AnimationPanelController[] animatedPanels;
-    public int currentIndex = 0;
+    private int currentIndex = 0;
+    private int currentChapterIndex = 0;
+
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
-        showScreen(currentIndex);
+        // start faded out for now
+        await animatedPanels[currentIndex].HideElements();
+        ShowScreen(currentIndex);
     }
 
     // Update is called once per frame
@@ -19,28 +26,62 @@ public class AnimationSytemController : MonoBehaviour
 
     }
 
-    public void step(int delta)
+    public void Step(int delta)
     {
-        showScreen((currentIndex + delta) % animatedPanels.Length);
+        int targetIndex = (currentIndex + delta) % animatedPanels.Length;
+        Debug.Log("Step to: " + targetIndex);
+        ShowScreen(targetIndex);
     }
 
-    public void showScreen(int targetIndex)
+    public void ChapterStep(int delta)
     {
+        // find next or previous chapter start
+        AnimationPanelController[] chapterPanels = animatedPanels.Where(c => c.isChapterStart).ToArray();
+        int targetChapterIndex = (currentChapterIndex + delta) % chapterPanels.Length;
 
-        for (int index = 0; index <= animatedPanels.Length; index++)
+        // get the panel index for the panel which matches the start chapter panel
+        int targetIndex = Array.FindIndex(animatedPanels, p => p == chapterPanels[targetChapterIndex]);
+
+        ShowScreen(targetIndex);
+    }
+
+    public async void ShowScreen(int targetIndex)
+    {
+        Debug.Log("Show panel " + targetIndex + " from prev index " + currentIndex); 
+        Debug.Log("animatedPanels.Length = " + animatedPanels.Length);
+
+        var tasks = new List<Task>();
+        int _currentChapterIndex = -1; // will turn 0 on first loop run
+        AnimationPanelController panelToShow = null;
+
+        for (int index = 0; index < animatedPanels.Length; index++)
         {
-            AnimationPanelController element = animatedPanels[index];
+            // set the chapter index
+            if (panelToShow && animatedPanels[index].isChapterStart)
+            {
+                _currentChapterIndex++;
+            }
+
             if (targetIndex == index)
             {
-                // TODO wait until hideElements is done to showElements
-                element.showElements();
+                Debug.Log("Show panel found " + animatedPanels[index].gameObject.name);
+                panelToShow = animatedPanels[index];
+
             } else
             {
-                element.hideElements();
+                tasks.Add(animatedPanels[index].HideElements());
             }
+
         }
+        Debug.Log("Show panel!! " + panelToShow.gameObject.name);
+
+        await Task.WhenAll(tasks);
+
+        panelToShow.ShowElements();
 
         currentIndex = targetIndex;
+        currentChapterIndex = _currentChapterIndex;
+
     }
 
 }

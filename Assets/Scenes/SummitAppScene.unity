@@ -440,6 +440,8 @@ MonoBehaviour:
   - {fileID: 1011367772}
   - {fileID: 581770151}
   sequenceDelay: 0.2
+  animationSpeed: 2
+  fadeOutSpeed: 0.5
   delayedElements:
   - {fileID: 718338227}
   - {fileID: 2051760539}
@@ -934,13 +936,14 @@ GameObject:
   - component: {fileID: 190589309}
   - component: {fileID: 190589308}
   - component: {fileID: 190589310}
+  - component: {fileID: 190589311}
   m_Layer: 0
   m_Name: Onboarding_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &190589307
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1020,8 +1023,22 @@ MonoBehaviour:
   backgroundElements: []
   typoElements: []
   sequenceDelay: 0.2
+  animationSpeed: 2
+  fadeOutSpeed: 0.5
   delayedElements: []
   delay: 2
+--- !u!225 &190589311
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190589306}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &196637792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,6 +1859,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 653636285}
+  - {fileID: 556062122}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1865,6 +1883,7 @@ MonoBehaviour:
   - {fileID: 2131269020}
   - {fileID: 1165623992}
   currentIndex: 0
+  fadeOutSpeed: 0.5
 --- !u!1 &341803037
 GameObject:
   m_ObjectHideFlags: 0
@@ -2801,12 +2820,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556062119}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 334566689}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &568120087
 GameObject:
@@ -3283,6 +3302,8 @@ MonoBehaviour:
   - {fileID: 1263240367}
   typoElements: []
   sequenceDelay: 0.2
+  animationSpeed: 2
+  fadeOutSpeed: 0.5
   delayedElements: []
   delay: 2
 --- !u!114 &596637151
@@ -4316,6 +4337,8 @@ MonoBehaviour:
   - {fileID: 1953498558}
   - {fileID: 2066115229}
   sequenceDelay: 0.2
+  animationSpeed: 2
+  fadeOutSpeed: 0.5
   delayedElements:
   - {fileID: 523964129}
   - {fileID: 1825499199}
@@ -4834,7 +4857,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 334566690}
         m_TargetAssemblyTypeName: AnimationSytemController, Assembly-CSharp
-        m_MethodName: step
+        m_MethodName: Step
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5907,6 +5930,125 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098355939}
   m_CullTransparentMesh: 0
+--- !u!1001 &1164309632
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeLeft.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeRight.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeLeft.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 334566690}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeRight.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 334566690}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeLeft.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: step
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeRight.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: step
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeLeft.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AnimationSytemController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeLeft.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeRight.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AnimationSytemController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138780, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: onSwipeRight.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138781, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613325691165138783, guid: 564c7f8be71869c4fb5e6fd761dc0943,
+        type: 3}
+      propertyPath: m_Name
+      value: SwipeDetector
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 564c7f8be71869c4fb5e6fd761dc0943, type: 3}
 --- !u!1 &1165623988
 GameObject:
   m_ObjectHideFlags: 0
@@ -5919,6 +6061,7 @@ GameObject:
   - component: {fileID: 1165623991}
   - component: {fileID: 1165623990}
   - component: {fileID: 1165623992}
+  - component: {fileID: 1165623993}
   m_Layer: 0
   m_Name: Health_02
   m_TagString: Untagged
@@ -6004,8 +6147,22 @@ MonoBehaviour:
   backgroundElements: []
   typoElements: []
   sequenceDelay: 0.2
+  animationSpeed: 2
+  fadeOutSpeed: 0.5
   delayedElements: []
   delay: 2
+--- !u!225 &1165623993
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165623988}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1202326889
 GameObject:
   m_ObjectHideFlags: 0
@@ -8325,7 +8482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1751415987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8406,6 +8563,8 @@ MonoBehaviour:
   backgroundElements: []
   typoElements: []
   sequenceDelay: 0.2
+  animationSpeed: 2
+  fadeOutSpeed: 0.5
   delayedElements: []
   delay: 2
 --- !u!225 &1751415991
@@ -9425,7 +9584,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 334566690}
         m_TargetAssemblyTypeName: AnimationSytemController, Assembly-CSharp
-        m_MethodName: step
+        m_MethodName: Step
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9771,7 +9930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2048572515
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10192,6 +10351,7 @@ GameObject:
   - component: {fileID: 2131269019}
   - component: {fileID: 2131269018}
   - component: {fileID: 2131269020}
+  - component: {fileID: 2131269021}
   m_Layer: 0
   m_Name: Health_01
   m_TagString: Untagged
@@ -10276,5 +10436,19 @@ MonoBehaviour:
   backgroundElements: []
   typoElements: []
   sequenceDelay: 0.2
+  animationSpeed: 2
+  fadeOutSpeed: 0.5
   delayedElements: []
   delay: 2
+--- !u!225 &2131269021
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131269016}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
