@@ -47,8 +47,6 @@ public class AnimationSytemController : MonoBehaviour
 
     public async void ShowScreen(int targetIndex)
     {
-        Debug.Log("Show panel " + targetIndex + " from prev index " + currentIndex); 
-        Debug.Log("animatedPanels.Length = " + animatedPanels.Length);
 
         var tasks = new List<Task>();
         int _currentChapterIndex = -1; // will turn 0 on first loop run
@@ -64,7 +62,6 @@ public class AnimationSytemController : MonoBehaviour
 
             if (targetIndex == index)
             {
-                Debug.Log("Show panel found " + animatedPanels[index].gameObject.name);
                 panelToShow = animatedPanels[index];
 
             } else
@@ -73,7 +70,6 @@ public class AnimationSytemController : MonoBehaviour
             }
 
         }
-        Debug.Log("Show panel!! " + panelToShow.gameObject.name);
 
         await Task.WhenAll(tasks);
 
