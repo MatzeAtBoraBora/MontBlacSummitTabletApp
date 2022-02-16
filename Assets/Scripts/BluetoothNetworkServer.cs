@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using Shatalmic;
 using System;
 using UnityEngine.Events;
-
+using DG.Tweening;
 public class BluetoothNetworkServer : MonoBehaviour
 {
 	/* External UI attributes */
@@ -272,8 +272,11 @@ public class BluetoothNetworkServer : MonoBehaviour
 				break;
 		}
 	}
-
-	public void OnOK()
+	private void HidePanel(){
+		gameObject.GetComponent<CanvasGroup>().DOFade(0,0.5f);
+		gameObject.GetComponent<CanvasGroup>().interactable = false;
+		gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+	}	public void OnOK()
 	{
 		BluetoothSettingsDialog.SetActive(false);
 	}
@@ -295,7 +298,44 @@ public class BluetoothNetworkServer : MonoBehaviour
 			});
 		}
 	}
-
+public void SendServerMessage(string message){
+		Debug.Log("Message" + message);
+		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message);
+			if (isServer)
+			{
+				if (connectedDeviceList != null)
+				{
+					if (connectedDeviceList.Count == 1)
+					{
+						if (deviceToSkip == null)
+						{
+							networking.WriteDevice(connectedDeviceList[0], bytes, () =>
+							{
+								//we are sending data in our channel
+							});
+						}
+						else
+						{
+							deviceToSkip = null;
+							//we are not writing in our channel
+						}
+					}
+					else
+					{
+						deviceToWriteIndex = 0;
+						writeDeviceBytes = true;
+						bytesToWrite = bytes;
+					}
+				}
+				else if (deviceToSkip != null)
+					deviceToSkip = null;
+			}
+			else
+			{
+				//sending out test data
+				networking.SendFromClient(bytes);
+			}
+	}
 	List<string> bluetoothErrors = new List<string>
 	{
 		"Bluetooth LE Not Enabled",

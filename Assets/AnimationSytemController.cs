@@ -5,7 +5,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
-
+using UnityEngine.Events;
 public class AnimationSytemController : MonoBehaviour
 {
 
@@ -13,7 +13,11 @@ public class AnimationSytemController : MonoBehaviour
     public AnimationPanelController[] animatedPanels;
     public AnimationPanelController crownIcon;
     public AnimationPanelController navbarUiPanel;
-
+    [System.Serializable]
+	public class IndexEvent : UnityEvent<String>
+	{
+	}
+	public IndexEvent onIndexChanged;
     private int currentIndex = 0;
     private int currentChapterIndex = 0;
 
@@ -44,10 +48,16 @@ public class AnimationSytemController : MonoBehaviour
             TranslateCrownIcon();
             navbarUiPanel.ShowElements();
         }
-
+        
         Debug.Log("Step to: " + targetIndex);
+        onIndexChanged.Invoke(targetIndex.ToString());
         ShowScreen(targetIndex);
 
+    }
+        public void messageReceived(String message)
+    {
+        int messageIndex = System.Convert.ToInt32(message);
+        Step(messageIndex);
     }
 
     public void ChapterStep(int delta)
