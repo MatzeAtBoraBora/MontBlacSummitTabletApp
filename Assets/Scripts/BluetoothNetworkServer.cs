@@ -150,6 +150,8 @@ public class BluetoothNetworkServer : MonoBehaviour
 					ButtonStopNetwork.SetActive(true);
 					ButtonSendTestData.SetActive(true);
 
+					HidePanel();
+
 					networking.StartServer(networkName, (connectedDevice) =>
 					{
 						if (connectedDeviceList == null)
@@ -161,6 +163,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 
 							//We are connected
 							OnClientConnected.Invoke();
+							HidePanel();
 						}
 						//Start Server
 						OnStartServer.Invoke();
