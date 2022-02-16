@@ -6,15 +6,21 @@ using System.Threading.Tasks;
 
 public class AnimationPanelController : MonoBehaviour {
     public bool isChapterStart = false;
-
-    public GameObject[] backgroundElements;
-    public GameObject[] sequenceElements;
-    public float sequenceDelay = 0.5f;
     public float animationSpeed = 2.0f;
     public float fadeOutSpeed = 0.5f;
 
-    public GameObject[] delayedElements;
+    [Space]
+    [Header("Initial fading elements")]
+    public GameObject[] backgroundElements;
+
+    [Header("Delay spaced fading elements")]
+    public float sequenceDelay = 0.5f;
+    public GameObject[] sequenceElements;
+
+
+    [Header("Delayed group fading elements")]
     public float delay = 2f;
+    public GameObject[] delayedElements;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +50,7 @@ public class AnimationPanelController : MonoBehaviour {
 
     public void FadeInBackground()
     {
+
         foreach (GameObject element in backgroundElements)
         {
             // init state
@@ -109,5 +116,9 @@ public class AnimationPanelController : MonoBehaviour {
         {
             element.GetComponent<CanvasGroup>().DOFade(0, animationSpeed);
         }
+    }
+    public void SetAlpha(float opacity)
+    {
+        this.GetComponent<CanvasGroup>().DOFade(0, 0.0f);
     }
 }
