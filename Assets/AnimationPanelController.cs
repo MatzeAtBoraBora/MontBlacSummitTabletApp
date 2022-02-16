@@ -14,7 +14,7 @@ public class AnimationPanelController : MonoBehaviour {
     public GameObject[] backgroundElements;
 
     [Header("Delay spaced fading elements")]
-    public float sequenceDelay = 0.5f;
+    public float sequenceDelay = 0.25f;
     public GameObject[] sequenceElements;
 
 
