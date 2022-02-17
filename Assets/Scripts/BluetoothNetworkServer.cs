@@ -42,7 +42,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public MessageEvent OnMessageReceived;
 	public UnityEvent OnStopServer;
 
-
+    public Text debugMessage;
 	/* Internal Server attributes */
 	private Networking networking = null;
 	private List<Networking.NetworkDevice> connectedDeviceList = null;
@@ -309,19 +309,21 @@ public class BluetoothNetworkServer : MonoBehaviour
 public void SendServerMessage(string message){
 	String test = "test";
 		Debug.Log("Message" + message);
+		debugMessage.text = "Message" + message;
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message + test);
 			if (isServer)
 			{
+				debugMessage.text = "Message is Server" + message;
 				Debug.Log("Message is Server" + message);
 				if (connectedDeviceList != null)
 				{
-					
+					debugMessage.text = "connectedDeviceList" + message;
 					if (connectedDeviceList.Count == 1)
 					{
-						
+						debugMessage.text = "connectedDeviceList.Count == 1" + message;
 						if (deviceToSkip == null)
 						{
-							
+							debugMessage.text = "deviceToSkip == null" + message;
 							networking.WriteDevice(connectedDeviceList[0], bytes, () =>
 							{
 								//we are sending data in our channel
