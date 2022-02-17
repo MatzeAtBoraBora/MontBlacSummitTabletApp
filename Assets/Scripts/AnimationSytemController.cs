@@ -33,8 +33,8 @@ public class AnimationSytemController : MonoBehaviour
     async void Start()
     {
         // start faded out for now
-        crownIcon.SetAlpha(0);
-        navbarUiPanel.SetAlpha(0);
+        crownIcon.HideElements();
+        navbarUiPanel.HideElements();
         HideMenu();
         await animatedPanels[currentIndex].HideElements();
         ShowScreen(currentIndex);
@@ -167,6 +167,8 @@ public class AnimationSytemController : MonoBehaviour
 
     public async void ShowCrownIcon()
     {
+
+        crownIcon.gameObject.SetActive(true);
         // fade out slowly
         await crownIcon.GetComponent<CanvasGroup>().DOFade(0, 0.5f).AsyncWaitForCompletion();
 
@@ -184,6 +186,8 @@ public class AnimationSytemController : MonoBehaviour
 
     public async void ShowMenu()
     {
+
+        menuPanel.gameObject.SetActive(true);
         menuPanel.transform.DOLocalMoveY(-20, 0f);
         menuPanel.GetComponent<CanvasGroup>().DOFade(0, 0f);
 
@@ -198,6 +202,7 @@ public class AnimationSytemController : MonoBehaviour
         // fade out slowly
         await menuPanel.HideElements();
         isMenuOpen = false;
+        menuPanel.gameObject.SetActive(false);
     }
 
     public async void ToggleMenu()

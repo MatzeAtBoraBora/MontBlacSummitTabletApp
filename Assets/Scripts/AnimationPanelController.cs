@@ -34,7 +34,10 @@ public class AnimationPanelController : MonoBehaviour {
         
     }
 
-    public void ShowElements() {
+    public void ShowElements()
+    {
+        this.gameObject.SetActive(true);
+
         this.GetComponent<CanvasGroup>().DOFade(1, 0f);
         FadeInBackground();
         FadeInSequence();
@@ -44,7 +47,9 @@ public class AnimationPanelController : MonoBehaviour {
 
     public async Task HideElements()
     {
+
         await FadeOutSelf();
+        this.gameObject.SetActive(false);
 
     }
 
