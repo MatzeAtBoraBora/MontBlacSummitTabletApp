@@ -13,6 +13,7 @@ public class AnimationSytemController : MonoBehaviour
     public AnimationPanelController[] animatedPanels;
     public AnimationPanelController crownIcon;
     public AnimationPanelController navbarUiPanel;
+    public AnimationPanelController menuPanel;
     [System.Serializable]
 	public class IndexEvent : UnityEvent<String>
 	{
@@ -20,6 +21,8 @@ public class AnimationSytemController : MonoBehaviour
 	public IndexEvent onIndexChanged;
     private int currentIndex = 0;
     private int currentChapterIndex = 0;
+
+    private bool isMenuOpen = false;
 
     // Start is called before the first frame update
     async void Start()
@@ -41,23 +44,18 @@ public class AnimationSytemController : MonoBehaviour
     public void Step(int delta)
     {
         int targetIndex = (animatedPanels.Length + currentIndex + delta) % animatedPanels.Length;
-
-        // move crown icon only from 0 to 1 panels
-        if (currentIndex == 0 && targetIndex != 0)
-        {
-            TranslateCrownIcon();
-            navbarUiPanel.ShowElements();
-        }
         
-        Debug.Log("Step to: " + targetIndex);
+        // Debug.Log("Step to: " + targetIndex);
         onIndexChanged.Invoke(targetIndex.ToString());
         ShowScreen(targetIndex);
 
     }
-        public void messageReceived(String message)
+
+public void messageReceived(String message)
     {
         Debug.Log(message);
         int messageIndex = System.Convert.ToInt32(message);
+        // TODO make sure we document the types of data and which functions to use
         Step(messageIndex);
     }
 
@@ -80,18 +78,14 @@ public class AnimationSytemController : MonoBehaviour
         int _currentChapterIndex = -1; // will turn 0 on first loop run
         AnimationPanelController panelToShow = null;
 
+        OnScreenChange(targetIndex);
+
         for (int index = 0; index < animatedPanels.Length; index++)
         {
             // set the chapter index
             if (panelToShow && animatedPanels[index].isChapterStart)
             {
                 _currentChapterIndex++;
-            }
-            // very first screen
-            if (targetIndex == 0)
-            {
-                ShowCrownIcon();
-                navbarUiPanel.HideElements();
             }
 
             if (targetIndex == index)
@@ -117,6 +111,29 @@ public class AnimationSytemController : MonoBehaviour
         currentChapterIndex = _currentChapterIndex;
         }
 
+    }
+
+    private void OnScreenChange(int targetIndex)
+    {
+        // close menu
+        if (isMenuOpen)
+        {
+            HideMenu();
+        }
+        // move crown and show navbar when exiting idle screen
+        if (currentIndex == 0 && targetIndex != 0)
+        {
+            TranslateCrownIcon();
+            navbarUiPanel.ShowElements();
+        }
+
+        // TODO FIX avoid crown show/translate interruption
+        // very first screen
+        if (targetIndex == 0)
+        {
+            ShowCrownIcon();
+            navbarUiPanel.HideElements();
+        }
     }
 
     public void TranslateCrownIcon(bool backwards = false)
@@ -153,6 +170,34 @@ public class AnimationSytemController : MonoBehaviour
         // to state
         crownIcon.transform.DOLocalMove(initPos, 2.0f).SetEase(Ease.OutCubic).SetDelay(0.6f);
         crownIcon.GetComponent<CanvasGroup>().DOFade(1, 2.0f).SetDelay(0.6f); ;
+    }
+
+    public async void ShowMenu()
+    {
+        menuPanel.transform.DOLocalMoveY(-20, 0f);
+        menuPanel.GetComponent<CanvasGroup>().DOFade(0, 0f) ;
+
+        // to state
+        menuPanel.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutCubic);
+        await menuPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f).AsyncWaitForCompletion();
+        isMenuOpen = true;
+    }
+
+    public async void HideMenu()
+    {
+        // fade out slowly
+        await menuPanel.HideElements();
+        isMenuOpen = false;
+    }
+
+    public async void ToggleMenu()
+    {
+        if (isMenuOpen){
+               HideMenu();
+         } else {
+            ShowMenu();
+        }
+
     }
 
 }

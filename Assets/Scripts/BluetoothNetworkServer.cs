@@ -140,19 +140,21 @@ public class BluetoothNetworkServer : MonoBehaviour
 		{		
 			case "ButtonStartServer":
 				
-					ServerOutputText.text = "Start Server";
+				ServerOutputText.text = "Start Server";
 
-					deviceToSkip = null;
-					deviceToWriteIndex = 0;
-					isServer = true;
-					ButtonStartServer.SetActive(false);
-					ButtonStartClient.SetActive(false);
-					ButtonStopNetwork.SetActive(true);
-					ButtonSendTestData.SetActive(true);
+				deviceToSkip = null;
+				deviceToWriteIndex = 0;
+				isServer = true;
+				ButtonStartServer.SetActive(false);
+				ButtonStartClient.SetActive(false);
+				ButtonStopNetwork.SetActive(true);
+				ButtonSendTestData.SetActive(true);
 
-					HidePanel();
+				HidePanel();
 
-					networking.StartServer(networkName, (connectedDevice) =>
+				Debug.Log("Starting Server");
+
+				networking.StartServer(networkName, (connectedDevice) =>
 					{
 						if (connectedDeviceList == null)
 							connectedDeviceList = new List<Networking.NetworkDevice>();
@@ -164,6 +166,8 @@ public class BluetoothNetworkServer : MonoBehaviour
 							//We are connected
 							OnClientConnected.Invoke();
 							HidePanel();
+
+							Debug.Log("Client connected");
 						}
 						//Start Server
 						OnStartServer.Invoke();
@@ -288,6 +292,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	private void ReadOutBytes(byte[] bytes) {
 		ServerOutputText.text = "Getting Bytes in!";
 		String bytesAsString = System.Text.Encoding.UTF8.GetString(bytes);
+		// TODO what data is this representing?
 		ServerOutputText.text = bytesAsString;
 		OnMessageReceived.Invoke(bytesAsString);
 	}
