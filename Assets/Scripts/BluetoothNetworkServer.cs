@@ -35,6 +35,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public UnityEvent OnStartServer;
 	public UnityEvent OnStartClient;
 	public UnityEvent OnClientConnected;
+	public UnityEvent OnClientDisonnected;
 	[System.Serializable]
 	public class MessageEvent : UnityEvent<String>
 	{
@@ -156,6 +157,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 
 				networking.StartServer(networkName, (connectedDevice) =>
 					{
+						// on device ready
 						if (connectedDeviceList == null)
 							connectedDeviceList = new List<Networking.NetworkDevice>();
 
@@ -173,10 +175,19 @@ public class BluetoothNetworkServer : MonoBehaviour
 						OnStartServer.Invoke();
 					}, (disconnectedDevice) =>
 					{
+						// on client disconnected
 						if (connectedDeviceList != null && connectedDeviceList.Contains(disconnectedDevice))
+                        {
 							connectedDeviceList.Remove(disconnectedDevice);
+							if (connectedDeviceList.Count == 0)
+                            {
+								// only triggered when no more devices left
+								OnClientDisonnected.Invoke();
+                            }
+						}
 					}, (dataDevice, characteristic, bytes) =>
 					{
+						// on device data
 						deviceToSkip = dataDevice;
 						//We are getting bytes in
 						ReadOutBytes(bytes);

@@ -16,14 +16,14 @@ public class AnimationSytemController : MonoBehaviour
     public AnimationPanelController navbarUiPanel;
     public AnimationPanelController menuPanel;
 
-	//[Space]
-	//[Header("Custom Events")]
+    //[Space]
+    //[Header("Custom Events")]
 
     [System.Serializable]
-	public class IndexEvent : UnityEvent<String>
-	{
-	}
-	public IndexEvent onIndexChanged;
+    public class IndexEvent : UnityEvent<String>
+    {
+    }
+    public IndexEvent onIndexChanged;
     private int currentIndex = 0;
     private int currentChapterIndex = 0;
 
@@ -50,13 +50,13 @@ public class AnimationSytemController : MonoBehaviour
     public void Step(int delta)
     {
         int targetIndex = (animatedPanels.Length + currentIndex + delta) % animatedPanels.Length;
-        
+
         // Debug.Log("Step to: " + targetIndex);
         ShowScreen(targetIndex);
 
     }
 
-public void messageReceived(String message)
+    public void messageReceived(String message)
     {
         Debug.Log(message);
         int messageIndex = System.Convert.ToInt32(message);
@@ -98,7 +98,8 @@ public void messageReceived(String message)
                 // found the index to show
                 panelToShow = animatedPanels[index];
 
-            } else
+            }
+            else
             {
                 tasks.Add(animatedPanels[index].HideElements());
             }
@@ -108,12 +109,12 @@ public void messageReceived(String message)
         if (panelToShow)
         {
 
-        await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks);
 
-        panelToShow.ShowElements();
+            panelToShow.ShowElements();
 
-        currentIndex = targetIndex;
-        currentChapterIndex = _currentChapterIndex;
+            currentIndex = targetIndex;
+            currentChapterIndex = _currentChapterIndex;
         }
 
     }
@@ -123,7 +124,7 @@ public void messageReceived(String message)
 
         // invoke event
         onIndexChanged.Invoke(targetIndex.ToString());
-        
+
         // close menu
         if (isMenuOpen)
         {
@@ -184,7 +185,7 @@ public void messageReceived(String message)
     public async void ShowMenu()
     {
         menuPanel.transform.DOLocalMoveY(-20, 0f);
-        menuPanel.GetComponent<CanvasGroup>().DOFade(0, 0f) ;
+        menuPanel.GetComponent<CanvasGroup>().DOFade(0, 0f);
 
         // to state
         menuPanel.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutCubic);
@@ -201,12 +202,26 @@ public void messageReceived(String message)
 
     public async void ToggleMenu()
     {
-        if (isMenuOpen){
-               HideMenu();
-         } else {
+        if (isMenuOpen)
+        {
+            HideMenu();
+        }
+        else
+        {
             ShowMenu();
         }
 
     }
 
+    public void OnNetworkStatusChange(AnimationPanelController uiStatusIndicator)
+    {
+        AnimationPanelController[] uiStatusIndicators = uiStatusIndicator.GetComponentInParent<GameObject>().GetComponentsInChildren<AnimationPanelController>();
+
+        foreach (AnimationPanelController element in uiStatusIndicators)
+        {
+            element.SetAlpha(0);
+        }
+
+        uiStatusIndicator.ShowElements();
+    }
 }
