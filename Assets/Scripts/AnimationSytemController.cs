@@ -53,6 +53,7 @@ public class AnimationSytemController : MonoBehaviour
 
 public void messageReceived(String message)
     {
+        Debug.Log(message);
         int messageIndex = System.Convert.ToInt32(message);
         // TODO make sure we document the types of data and which functions to use
         Step(messageIndex);

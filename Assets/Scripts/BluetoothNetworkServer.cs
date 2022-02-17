@@ -307,19 +307,25 @@ public class BluetoothNetworkServer : MonoBehaviour
 		}
 	}
 public void SendServerMessage(string message){
+	String test = "test";
 		Debug.Log("Message" + message);
-		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message);
+		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message + test);
 			if (isServer)
 			{
+				Debug.Log("Message is Server" + message);
 				if (connectedDeviceList != null)
 				{
+					
 					if (connectedDeviceList.Count == 1)
 					{
+						
 						if (deviceToSkip == null)
 						{
+							
 							networking.WriteDevice(connectedDeviceList[0], bytes, () =>
 							{
 								//we are sending data in our channel
+								
 							});
 						}
 						else
@@ -340,6 +346,7 @@ public void SendServerMessage(string message){
 			}
 			else
 			{
+				Debug.Log("not Server");
 				//sending out test data
 				networking.SendFromClient(bytes);
 			}
