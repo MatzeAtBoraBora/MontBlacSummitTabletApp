@@ -121,7 +121,7 @@ public void messageReceived(String message)
 
     private void OnScreenChange(int targetIndex)
     {
-        OnShowScreen.Invoke(targetIndex); // can I pass params here ?
+        OnShowScreen.Invoke(); // can I pass params here ?
 
         // close menu
         if (isMenuOpen)
