@@ -14,6 +14,11 @@ public class AnimationSytemController : MonoBehaviour
     public AnimationPanelController crownIcon;
     public AnimationPanelController navbarUiPanel;
     public AnimationPanelController menuPanel;
+
+	[Space]
+	[Header("Custom Events")]
+	public UnityEvent OnShowScreen;
+
     [System.Serializable]
 	public class IndexEvent : UnityEvent<String>
 	{
@@ -30,6 +35,7 @@ public class AnimationSytemController : MonoBehaviour
         // start faded out for now
         crownIcon.SetAlpha(0);
         navbarUiPanel.SetAlpha(0);
+        HideMenu();
         await animatedPanels[currentIndex].HideElements();
         ShowScreen(currentIndex);
     }
@@ -115,6 +121,8 @@ public void messageReceived(String message)
 
     private void OnScreenChange(int targetIndex)
     {
+        OnShowScreen.Invoke(targetIndex); // can I pass params here ?
+
         // close menu
         if (isMenuOpen)
         {
