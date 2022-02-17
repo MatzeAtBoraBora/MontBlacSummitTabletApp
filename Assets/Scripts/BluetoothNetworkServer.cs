@@ -306,15 +306,20 @@ public void SendServerMessage(string message){
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message);
 			if (isServer)
 			{
+				Debug.Log("Message is Server" + message);
 				if (connectedDeviceList != null)
 				{
+					Debug.Log("Message Device List" + message);
 					if (connectedDeviceList.Count == 1)
 					{
+						Debug.Log("Message Device List Count" + message);
 						if (deviceToSkip == null)
 						{
+							Debug.Log("Message Device to Skip" + message);
 							networking.WriteDevice(connectedDeviceList[0], bytes, () =>
 							{
 								//we are sending data in our channel
+								Debug.Log("Message Final" + message);
 							});
 						}
 						else
