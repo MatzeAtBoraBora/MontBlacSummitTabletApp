@@ -35,7 +35,6 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public UnityEvent OnStartServer;
 	public UnityEvent OnStartClient;
 	public UnityEvent OnClientConnected;
-	public UnityEvent OnClientDisonnected;
 	[System.Serializable]
 	public class MessageEvent : UnityEvent<String>
 	{
@@ -43,7 +42,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public MessageEvent OnMessageReceived;
 	public UnityEvent OnStopServer;
 
-	//public Text debugMessage;
+    public Text debugMessage;
 	/* Internal Server attributes */
 	private Networking networking = null;
 	private List<Networking.NetworkDevice> connectedDeviceList = null;
@@ -157,7 +156,6 @@ public class BluetoothNetworkServer : MonoBehaviour
 
 				networking.StartServer(networkName, (connectedDevice) =>
 					{
-						// on device ready
 						if (connectedDeviceList == null)
 							connectedDeviceList = new List<Networking.NetworkDevice>();
 
@@ -175,19 +173,10 @@ public class BluetoothNetworkServer : MonoBehaviour
 						OnStartServer.Invoke();
 					}, (disconnectedDevice) =>
 					{
-						// on client disconnected
 						if (connectedDeviceList != null && connectedDeviceList.Contains(disconnectedDevice))
-                        {
 							connectedDeviceList.Remove(disconnectedDevice);
-							if (connectedDeviceList.Count == 0)
-                            {
-								// only triggered when no more devices left
-								OnClientDisonnected.Invoke();
-                            }
-						}
 					}, (dataDevice, characteristic, bytes) =>
 					{
-						// on device data
 						deviceToSkip = dataDevice;
 						//We are getting bytes in
 						ReadOutBytes(bytes);
@@ -317,56 +306,54 @@ public class BluetoothNetworkServer : MonoBehaviour
 			});
 		}
 	}
-	public void SendServerMessage(string message){
-		String test = "test";
-		Debug.Log("Message: " + message);
-
-		//debugMessage.text = "Message" + message;
+public void SendServerMessage(string message){
+	String test = "test";
+		Debug.Log("Message" + message);
+		debugMessage.text = "Message" + message;
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message + test);
-
-		if (isServer)
-		{
-			//debugMessage.text = "Message is Server" + message;
-			Debug.Log("Message is Server" + message);
-			if (connectedDeviceList != null)
+			if (isServer)
 			{
-				//debugMessage.text = "connectedDeviceList" + message;
-				if (connectedDeviceList.Count == 1)
+				debugMessage.text = "Message is Server" + message + "bytes" + bytes;
+				//debugMessage.text = "Message is Server" + message;
+				Debug.Log("Message is Server" + message);
+				if (connectedDeviceList != null)
 				{
-					//debugMessage.text = "connectedDeviceList.Count == 1" + message;
-					if (deviceToSkip == null)
+					debugMessage.text = "connectedDeviceList" + message;
+					if (connectedDeviceList.Count == 1)
 					{
-						//debugMessage.text = "deviceToSkip == null" + message;
-						networking.WriteDevice(connectedDeviceList[0], bytes, () =>
+						debugMessage.text = "connectedDeviceList.Count == 1" + message;
+						if (deviceToSkip == null)
 						{
-							//we are sending data in our channel
-							
-						});
+							debugMessage.text = "deviceToSkip == null" + message;
+							networking.WriteDevice(connectedDeviceList[0], bytes, () =>
+							{
+								//we are sending data in our channel
+								
+							});
+						}
+						else
+						{
+							deviceToSkip = null;
+							//we are not writing in our channel
+						}
 					}
 					else
 					{
-						deviceToSkip = null;
-						//we are not writing in our channel
+						deviceToWriteIndex = 0;
+						writeDeviceBytes = true;
+						bytesToWrite = bytes;
 					}
 				}
-				else
-				{
-					deviceToWriteIndex = 0;
-					writeDeviceBytes = true;
-					bytesToWrite = bytes;
-				}
+				else if (deviceToSkip != null)
+					deviceToSkip = null;
 			}
-			else if (deviceToSkip != null)
-				deviceToSkip = null;
-		}
-		else
-		{
-			Debug.Log("not Server");
-			//sending out test data
-			networking.SendFromClient(bytes);
-		}
+			else
+			{
+				Debug.Log("not Server");
+				//sending out test data
+				networking.SendFromClient(bytes);
+			}
 	}
-
 	List<string> bluetoothErrors = new List<string>
 	{
 		"Bluetooth LE Not Enabled",
