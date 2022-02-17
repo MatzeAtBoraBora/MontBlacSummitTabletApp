@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 using System.Threading.Tasks;
 using System.Linq;
@@ -15,9 +16,8 @@ public class AnimationSytemController : MonoBehaviour
     public AnimationPanelController navbarUiPanel;
     public AnimationPanelController menuPanel;
 
-	[Space]
-	[Header("Custom Events")]
-	public UnityEvent OnShowScreen;
+	//[Space]
+	//[Header("Custom Events")]
 
     [System.Serializable]
 	public class IndexEvent : UnityEvent<String>
@@ -52,7 +52,6 @@ public class AnimationSytemController : MonoBehaviour
         int targetIndex = (animatedPanels.Length + currentIndex + delta) % animatedPanels.Length;
         
         // Debug.Log("Step to: " + targetIndex);
-        onIndexChanged.Invoke(targetIndex.ToString());
         ShowScreen(targetIndex);
 
     }
@@ -121,8 +120,10 @@ public void messageReceived(String message)
 
     private void OnScreenChange(int targetIndex)
     {
-        OnShowScreen.Invoke(); // can I pass params here ?
 
+        // invoke event
+        onIndexChanged.Invoke(targetIndex.ToString());
+        
         // close menu
         if (isMenuOpen)
         {
