@@ -91,7 +91,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 				if (ServerOutputText != null)
 					ServerOutputText.text = message;
 
-				BluetoothLEHardwareInterface.Log("Message: " + message);
+				BluetoothLEHardwareInterface.Log("Message:  " + message);
 			});
 		}
 	}
