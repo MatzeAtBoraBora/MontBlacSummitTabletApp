@@ -44,16 +44,17 @@ public class AnimationSytemController : MonoBehaviour
     public void Step(int delta)
     {
         int targetIndex = (animatedPanels.Length + currentIndex + delta) % animatedPanels.Length;
-        
         // Debug.Log("Step to: " + targetIndex);
         onIndexChanged.Invoke(targetIndex.ToString());
+        Debug.Log("Step" + targetIndex.ToString());
+
         ShowScreen(targetIndex);
 
     }
 
 public void messageReceived(String message)
     {
-        Debug.Log(message);
+        Debug.Log("messageReceived" + message);
         int messageIndex = System.Convert.ToInt32(message);
         // TODO make sure we document the types of data and which functions to use
         Step(messageIndex);

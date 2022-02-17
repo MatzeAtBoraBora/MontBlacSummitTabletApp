@@ -313,7 +313,8 @@ public void SendServerMessage(string message){
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message + test);
 			if (isServer)
 			{
-				debugMessage.text = "Message is Server" + message;
+				debugMessage.text = "Message is Server" + message + "bytes" + bytes;
+				//debugMessage.text = "Message is Server" + message;
 				Debug.Log("Message is Server" + message);
 				if (connectedDeviceList != null)
 				{
