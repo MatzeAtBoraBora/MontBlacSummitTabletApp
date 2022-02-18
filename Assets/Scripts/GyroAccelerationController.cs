@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class GyroAccelerationController : MonoBehaviour
 {
     public GameObject icon;
     public bool isGyro = false;
+    public Text debugText;
 
     //by now static because of canvas scaler
     private float screenWith = 1668.0f;
@@ -32,14 +34,17 @@ public class GyroAccelerationController : MonoBehaviour
             float direction = dataSet[0];
             if (direction == 0)
             {
+                debugText.text = "Move Left";
                 moveLeft();
             }
             else
             {
+                debugText.text = "Move Right";
                 moveRight();
             }
         }
         else {
+            debugText.text = "Gyro Data: "+ dataSet[0]+" / "+ dataSet[1];
             float xPos = screenWith / 2 + dataSet[0] * screenWith / 3;
             float yPos = screenHeight / 2 + dataSet[1] * screenHeight / 3 + verticalGap;
             icon.transform.DOMove(new Vector3(xPos, yPos, 0), 0.3f).SetEase(Ease.Linear);
