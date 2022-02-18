@@ -37,7 +37,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public UnityEvent OnClientConnected;
 
 	public UnityEvent<String> OnMessageReceived;
-	public UnityEvent<int> OnChangeScreenIndex;
+	public UnityEvent<int, bool> OnChangeScreenIndex;
 	public UnityEvent<float[]> OnChangeGyro;
 	public UnityEvent OnStopServer;
 
@@ -301,7 +301,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 		if (data[0] == "index")
         {
 			int targetIndex = System.Convert.ToInt32(data[1]); 
-			OnChangeScreenIndex.Invoke(targetIndex);
+			OnChangeScreenIndex.Invoke(targetIndex, true);
         } else if (data[0] == "gyro")
         {
 			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s));
