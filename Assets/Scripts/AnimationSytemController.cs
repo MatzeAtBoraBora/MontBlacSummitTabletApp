@@ -19,7 +19,7 @@ public class AnimationSytemController : MonoBehaviour
 	{
 	}
 	public IndexEvent onIndexChanged;
-    private int currentIndex = 0;
+    private int currentIndex = -1;
     private int currentChapterIndex = 0;
 
     private bool isMenuOpen = false;
@@ -32,7 +32,7 @@ public class AnimationSytemController : MonoBehaviour
         navbarUiPanel.HideElements();
         HideMenu();
         await animatedPanels[currentIndex].HideElements();
-        ShowScreen(currentIndex);
+        ShowScreen(0);
     }
 
     // Update is called once per frame
@@ -75,6 +75,10 @@ public void messageReceived(String message)
 
     public async void ShowScreen(int targetIndex)
     {
+        // do nothing if same screen
+        if (targetIndex == currentIndex)
+            return;
+        
 
         var tasks = new List<Task>();
         int _currentChapterIndex = -1; // will turn 0 on first loop run
