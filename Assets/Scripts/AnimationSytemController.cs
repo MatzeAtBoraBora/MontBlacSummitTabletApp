@@ -62,6 +62,10 @@ public class AnimationSytemController : MonoBehaviour
         ShowScreen(targetIndex);
     }
 
+    public void ShowScreenByIndex(int index) {
+        ShowScreen(index);
+    }
+
     public async void ShowScreen(int targetIndex, bool isFromNetwork = false)
     {
         // do nothing if same screen
