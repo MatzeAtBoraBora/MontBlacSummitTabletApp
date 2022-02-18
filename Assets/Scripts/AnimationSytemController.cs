@@ -31,7 +31,7 @@ public class AnimationSytemController : MonoBehaviour
         crownIcon.HideElements();
         navbarUiPanel.HideElements();
         HideMenu();
-        await animatedPanels[currentIndex].HideElements();
+        await animatedPanels[0].HideElements();
         ShowScreen(0);
     }
 
