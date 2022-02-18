@@ -154,13 +154,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c047e848d1c714084303bf6b5eb3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &334566688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6928464977717670896, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6928464977932691152}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &334566690 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6928464977717670898, guid: d8b85ffa87d4af149b1701960b4ebe2c,
     type: 3}
   m_PrefabInstance: {fileID: 6928464977932691152}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 334566688}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58df74e043fa9f341bb9280a7742b305, type: 3}
@@ -746,7 +752,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnChangeGyro.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 334566690}
+      objectReference: {fileID: 334566688}
     - target: {fileID: 4956331108829436797, guid: c86f2291fc5c4204bbe8ccf3b3b4aabb,
         type: 3}
       propertyPath: OnStartServer.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -760,12 +766,12 @@ PrefabInstance:
     - target: {fileID: 4956331108829436797, guid: c86f2291fc5c4204bbe8ccf3b3b4aabb,
         type: 3}
       propertyPath: OnChangeGyro.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateRotation
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4956331108829436797, guid: c86f2291fc5c4204bbe8ccf3b3b4aabb,
         type: 3}
       propertyPath: OnChangeScreenIndex.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4956331108829436797, guid: c86f2291fc5c4204bbe8ccf3b3b4aabb,
         type: 3}
