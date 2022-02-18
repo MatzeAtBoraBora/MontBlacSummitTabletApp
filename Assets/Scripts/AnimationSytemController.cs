@@ -69,7 +69,7 @@ public class AnimationSytemController : MonoBehaviour
             return;
 
         // only send bluetooth if the change was triggered in this device
-        if (!isFromNetwork) onIndexChanged.Invoke(targetIndex.ToString());
+        if (!isFromNetwork) onIndexChanged.Invoke("index_" + targetIndex.ToString());
 
         var tasks = new List<Task>();
         int _currentChapterIndex = -1; // will turn 0 on first loop run
