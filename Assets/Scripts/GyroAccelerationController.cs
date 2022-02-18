@@ -54,7 +54,7 @@ public class GyroAccelerationController : MonoBehaviour
     public void moveLeft()
     {
         icon.transform.DOMove(new Vector3(screenWith / 2 -screenWith / 3 , screenHeight / 2 + verticalGap, 0), 0.3f).SetEase(Ease.InOutSine);
-        icon.transform.DOMove(new Vector3(screenWith / 2, Screen.height / 2 + verticalGap, 0), 1f).SetDelay(1.0f);
+        icon.transform.DOMove(new Vector3(screenWith / 2, screenHeight / 2 + verticalGap, 0), 1f).SetDelay(1.0f);
     }
     public void moveRight()
     {
