@@ -40,6 +40,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public UnityEvent<String> OnMessageReceived;
 	public UnityEvent<int, bool> OnChangeScreenIndex;
 	public UnityEvent<float[]> OnChangeGyro;
+	public UnityEvent<float[]> OnChangeAccel;
 	public UnityEvent OnStopServer;
 
     
@@ -310,6 +311,11 @@ public class BluetoothNetworkServer : MonoBehaviour
 			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s));
             OnChangeGyro.Invoke(transform);
         }
+		else if (data[0] == "accel")
+		{
+			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s));
+			OnChangeAccel.Invoke(transform);
+		}
 
 
 	}
