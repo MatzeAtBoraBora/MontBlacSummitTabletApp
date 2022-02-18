@@ -151,6 +151,9 @@ public class BluetoothNetworkServer : MonoBehaviour
 				HidePanel();
 
 				Debug.Log("Starting Server: "+privateNetworkName);
+				
+				//Start Server
+				OnStartServer.Invoke();
 
 				networking.StartServer(privateNetworkName, (connectedDevice) =>
 					{
