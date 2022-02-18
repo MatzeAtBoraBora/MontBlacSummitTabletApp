@@ -13,6 +13,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public String networkName = "summit";
 	public String clientName = "summitClient";
 	public bool isClient = true;
+	private string privateNetworkName;
 
 	[Space]
 	[Header("Action Buttons")]
@@ -55,6 +56,8 @@ public class BluetoothNetworkServer : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		privateNetworkName = networkName + "0";
+
 		BluetoothSettingsDialog.SetActive(false);
 		if (isClient)
 		{
@@ -144,16 +147,12 @@ public class BluetoothNetworkServer : MonoBehaviour
 				deviceToSkip = null;
 				deviceToWriteIndex = 0;
 				isServer = true;
-				ButtonStartServer.SetActive(false);
-				ButtonStartClient.SetActive(false);
-				ButtonStopNetwork.SetActive(true);
-				ButtonSendTestData.SetActive(true);
-
+				
 				HidePanel();
 
-				Debug.Log("Starting Server");
+				Debug.Log("Starting Server: "+privateNetworkName);
 
-				networking.StartServer(networkName, (connectedDevice) =>
+				networking.StartServer(privateNetworkName, (connectedDevice) =>
 					{
 						if (connectedDeviceList == null)
 							connectedDeviceList = new List<Networking.NetworkDevice>();
@@ -170,6 +169,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 						}
 						//Start Server
 						OnStartServer.Invoke();
+
 					}, (disconnectedDevice) =>
 					{
 						if (connectedDeviceList != null && connectedDeviceList.Contains(disconnectedDevice))
@@ -184,7 +184,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 				break;
 
 			case "ButtonStartClient":
-				if (string.IsNullOrEmpty(networkName) || string.IsNullOrEmpty(clientName))
+				if (string.IsNullOrEmpty(privateNetworkName) || string.IsNullOrEmpty(clientName))
 				{
 					ServerOutputText.text = "Enter both a network and client name";
 				}
@@ -198,7 +198,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 					ButtonStopNetwork.SetActive(true);
 					ButtonSendTestData.SetActive(true);
 
-					networking.StartClient(networkName, clientName, () =>
+					networking.StartClient(privateNetworkName, clientName, () =>
 					{
 						networking.StatusMessage = "Started advertising";
 						OnStartClient.Invoke();
@@ -320,7 +320,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 			});
 		}
 	}
-public void SendServerMessage(string message){
+	public void SendServerMessage(string message){
 
 		Debug.Log("Message" + message);
 		
@@ -375,4 +375,9 @@ public void SendServerMessage(string message){
 		"Bluetooth LE Not Available",
 		"Bluetooth LE Not Supported",
 	};
+
+	public void SetNetworkChannel(int index) {
+		privateNetworkName = networkName + index;
+		Debug.Log("Network Name: "+privateNetworkName);
+	}
 }
