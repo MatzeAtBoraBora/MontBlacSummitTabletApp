@@ -308,11 +308,14 @@ public class BluetoothNetworkServer : MonoBehaviour
 			OnChangeScreenIndex.Invoke(targetIndex, true);
         } else if (data[0] == "gyro")
         {
+			//gyro_x,y,z,w
 			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s));
             OnChangeGyro.Invoke(transform);
         }
 		else if (data[0] == "accel")
 		{
+			//accel_0 - Left
+			//accel_1 - Right
 			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s));
 			OnChangeAccel.Invoke(transform);
 		}

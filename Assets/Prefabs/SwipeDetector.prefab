@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2613325691165138783}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -50,13 +50,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationIndexController, Assembly-CSharp
-        m_MethodName: SelectNextGameObject
-        m_Mode: 1
+        m_TargetAssemblyTypeName: AnimationSytemController, Assembly-CSharp
+        m_MethodName: Step
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -65,13 +65,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationIndexController, Assembly-CSharp
-        m_MethodName: SelectPreviousGameObject
-        m_Mode: 1
+        m_TargetAssemblyTypeName: AnimationSytemController, Assembly-CSharp
+        m_MethodName: Step
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: -1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -80,13 +80,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationIndexController, Assembly-CSharp
-        m_MethodName: SelectNextGameObject
-        m_Mode: 1
+        m_TargetAssemblyTypeName: AnimationSytemController, Assembly-CSharp
+        m_MethodName: ChapterStep
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -95,13 +95,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationIndexController, Assembly-CSharp
-        m_MethodName: SelectPreviousGameObject
-        m_Mode: 1
+        m_TargetAssemblyTypeName: AnimationSytemController, Assembly-CSharp
+        m_MethodName: ChapterStep
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: -1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
