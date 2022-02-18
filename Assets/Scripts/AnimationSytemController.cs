@@ -48,7 +48,6 @@ public class AnimationSytemController : MonoBehaviour
         int targetIndex = (animatedPanels.Length + currentIndex + delta) % animatedPanels.Length;
         // Debug.Log("Step to: " + targetIndex);
         onIndexChanged.Invoke(targetIndex.ToString());
-        Debug.Log("Step" + targetIndex.ToString());
 
         ShowScreen(targetIndex);
 
@@ -135,6 +134,11 @@ public class AnimationSytemController : MonoBehaviour
             navbarUiPanel.HideElements();
             isNavbarShown = false;
         }
+
+        // show name of current panel
+        //navbarUiPanel.text = animatedPanels[targetIndex].panelName;
+        TMPro.TextMeshProUGUI TMProObject = navbarUiPanel.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        TMProObject.text = animatedPanels[targetIndex].panelName;
     }
 
     public async void TranslateCrownIcon(bool backwards = false)

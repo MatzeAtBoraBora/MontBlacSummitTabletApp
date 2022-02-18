@@ -5,6 +5,8 @@ using DG.Tweening;
 using System.Threading.Tasks;
 
 public class AnimationPanelController : MonoBehaviour {
+    public string panelName = "";
+
     public bool isChapterStart = false;
     public float animationSpeed = 2.0f;
     public float fadeOutSpeed = 0.5f;

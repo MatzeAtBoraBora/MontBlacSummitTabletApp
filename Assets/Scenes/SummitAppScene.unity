@@ -836,11 +836,36 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 88100688}
+    - target: {fileID: 6928464976937198696, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: HEALTH  - HEARTBEAT SENSOR
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464977089469839, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: SLEEP QUALITY
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464977110053708, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: HEALTH
+      objectReference: {fileID: 0}
     - target: {fileID: 6928464977207761581, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 88100688}
+    - target: {fileID: 6928464977255586406, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: ONBOARDING 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464977623919833, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: SPORT
+      objectReference: {fileID: 0}
     - target: {fileID: 6928464977717670896, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
       propertyPath: m_Name
@@ -906,11 +931,31 @@ PrefabInstance:
       propertyPath: onIndexChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 88100688}
+    - target: {fileID: 6928464977845391278, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: ONBOARDING 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6928464977855632050, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 88100688}
+    - target: {fileID: 6928464978208280492, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: SPORT - STRAVA
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464978293443096, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: STRESS MANAGEMENT
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464978326615592, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: MUSIC
+      objectReference: {fileID: 0}
     - target: {fileID: 6928464978374123113, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -921,6 +966,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 6928464978386068281, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: panelName
+      value: ONBOARDING 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6928464978539640897, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -930,6 +980,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464978539640927, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_RaycastPadding.w
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464978539640927, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_RaycastPadding.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464978539640927, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_RaycastPadding.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464978539640927, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_RaycastPadding.z
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6928464978570723143, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
