@@ -35,11 +35,10 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public UnityEvent OnStartServer;
 	public UnityEvent OnStartClient;
 	public UnityEvent OnClientConnected;
-	[System.Serializable]
-	public class MessageEvent : UnityEvent<String>
-	{
-	}
-	public MessageEvent OnMessageReceived;
+
+	public UnityEvent<String> OnMessageReceived;
+	public UnityEvent<int> OnChangeScreenIndex;
+	public UnityEvent<float[]> OnChangeGyro;
 	public UnityEvent OnStopServer;
 
     
@@ -292,9 +291,24 @@ public class BluetoothNetworkServer : MonoBehaviour
 	private void ReadOutBytes(byte[] bytes) {
 		ServerOutputText.text = "Getting Bytes in!";
 		String bytesAsString = System.Text.Encoding.UTF8.GetString(bytes);
-		// TODO what data is this representing?
 		ServerOutputText.text = bytesAsString;
-		OnMessageReceived.Invoke(bytesAsString);
+
+		// different events decoding
+		// data[0] is the dataType, data[1] is the payload
+		String[] data = bytesAsString.Split('_');
+		if (data.Length < 1) return;
+
+		if (data[0] == "index")
+        {
+			int targetIndex = System.Convert.ToInt32(data[1]); 
+			OnChangeScreenIndex.Invoke(targetIndex);
+        } else if (data[0] == "gyro")
+        {
+			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s));
+            OnChangeGyro.Invoke(transform);
+        }
+
+
 	}
 	public void OnApplicationQuit()
 	{

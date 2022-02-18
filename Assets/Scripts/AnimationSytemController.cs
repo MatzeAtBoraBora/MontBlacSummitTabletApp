@@ -53,14 +53,6 @@ public class AnimationSytemController : MonoBehaviour
 
     }
 
-public void messageReceived(String message)
-    {
-        Debug.Log("messageReceived" + message);
-        int messageIndex = System.Convert.ToInt32(message);
-        // TODO make sure we document the types of data and which functions to use
-        Step(messageIndex);
-    }
-
     public void ChapterStep(int delta)
     {
         // find next or previous chapter start
@@ -209,6 +201,11 @@ public void messageReceived(String message)
             ShowMenu();
         }
 
+    }
+
+    public void UpdateRotation(float[] newRotation)
+    {
+        // TODO
     }
 
 }
