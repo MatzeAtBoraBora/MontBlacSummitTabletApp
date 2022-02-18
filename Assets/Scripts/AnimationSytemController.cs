@@ -23,6 +23,7 @@ public class AnimationSytemController : MonoBehaviour
     private int currentChapterIndex = 0;
 
     private bool isMenuOpen = false;
+    private bool isNavbarShown = false;
 
     // Start is called before the first frame update
     async void Start()
@@ -100,13 +101,13 @@ public class AnimationSytemController : MonoBehaviour
 
         if (panelToShow)
         {
+        currentIndex = targetIndex;
+        currentChapterIndex = _currentChapterIndex;
 
         await Task.WhenAll(tasks);
 
         panelToShow.ShowElements();
 
-        currentIndex = targetIndex;
-        currentChapterIndex = _currentChapterIndex;
         }
 
     }
@@ -118,11 +119,12 @@ public class AnimationSytemController : MonoBehaviour
         {
             HideMenu();
         }
-        // move crown and show navbar when exiting idle screen
-        if (currentIndex == 0 && targetIndex != 0)
+        // move crown and show navbar when not in idle screen
+        if (targetIndex != 0 && !isNavbarShown)
         {
             TranslateCrownIcon();
             navbarUiPanel.ShowElements();
+            isNavbarShown = true;
         }
 
         // TODO FIX avoid crown show/translate interruption
@@ -131,25 +133,20 @@ public class AnimationSytemController : MonoBehaviour
         {
             ShowCrownIcon();
             navbarUiPanel.HideElements();
+            isNavbarShown = false;
         }
     }
 
-    public void TranslateCrownIcon(bool backwards = false)
+    public async void TranslateCrownIcon(bool backwards = false)
     {
-        // init state
-        //float initY = crownIcon.transform.localPosition.y; // Y 891
-        //float initX = crownIcon.transform.localPosition.x; // X 0
-        //crownIcon.GetComponent<CanvasGroup>().DOFade(0, 0f);
-        //crownIcon.transform.DOLocalMoveY(initY - 50, 0f);
-        //crownIcon.transform.DOLocalMoveY(initX - 50, 0f);
-
+        crownIcon.transform.DOKill();
         int factor = backwards ? -1 : 1;
         Vector3 transform = new Vector3(-680 * factor, -100 * factor);
 
         // to state
         crownIcon.transform.DOLocalMove(transform, 1.5f).SetDelay(0.25f).SetEase(Ease.InOutSine); // X -712
-        crownIcon.transform.DOScale(1f, 1.5f).SetDelay(0.5f); // Y 1100
-        //crownIcon.GetComponent<CanvasGroup>().DOFade(1, 2f); // not needed
+        await crownIcon.transform.DOScale(1f, 1.5f).SetDelay(0.5f).AsyncWaitForCompletion(); // Y 1100
+
     }
 
 
@@ -196,7 +193,7 @@ public class AnimationSytemController : MonoBehaviour
     public async void ToggleMenu()
     {
         if (isMenuOpen){
-               HideMenu();
+           HideMenu();
          } else {
             ShowMenu();
         }
@@ -205,7 +202,7 @@ public class AnimationSytemController : MonoBehaviour
 
     public void UpdateRotation(float[] newRotation)
     {
-        // TODO
+        // TODO reference to the render model
     }
 
 }
