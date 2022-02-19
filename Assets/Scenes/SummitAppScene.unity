@@ -709,6 +709,26 @@ PrefabInstance:
       propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6928464976492277661, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 566.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464976492277661, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -395.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464976492277662, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_text
+      value: Waitng for Summit Watch...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464976577665108, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6928464976668610137, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -719,6 +739,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 88100688}
+    - target: {fileID: 6928464977682028919, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6928464977717670896, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
       propertyPath: m_Name
@@ -792,6 +817,11 @@ PrefabInstance:
     - target: {fileID: 6928464977932691159, guid: d8b85ffa87d4af149b1701960b4ebe2c,
         type: 3}
       propertyPath: isGyro
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928464978354218768, guid: d8b85ffa87d4af149b1701960b4ebe2c,
+        type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6928464978570723143, guid: d8b85ffa87d4af149b1701960b4ebe2c,
