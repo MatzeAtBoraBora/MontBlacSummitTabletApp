@@ -5,6 +5,7 @@ using Shatalmic;
 using System;
 using UnityEngine.Events;
 using DG.Tweening;
+
 public class BluetoothNetworkServer : MonoBehaviour
 {
 	/* External UI attributes */
@@ -22,7 +23,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public GameObject ButtonStopNetwork;
 	public GameObject ButtonSendTestData;
 
-	
+
 	[Space]
 	[Header("Debug & Explaination Layer")]
 	public Text ServerOutputText;
@@ -37,13 +38,15 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public UnityEvent OnStartClient;
 	public UnityEvent OnClientConnected;
 
+
+
 	public UnityEvent<String> OnMessageReceived;
 	public UnityEvent<int, bool> OnChangeScreenIndex;
 	public UnityEvent<float[]> OnChangeGyro;
 	public UnityEvent<float[]> OnChangeAccel;
 	public UnityEvent OnStopServer;
 
-    
+
 	/* Internal Server attributes */
 	private Networking networking = null;
 	private List<Networking.NetworkDevice> connectedDeviceList = null;
@@ -73,7 +76,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 
 		ButtonStopNetwork.SetActive(false);
 		ButtonSendTestData.SetActive(false);
-		
+
 		if (networking == null)
 		{
 			networking = GetComponent<Networking>();
@@ -140,51 +143,55 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public void OnButton(Button button)
 	{
 		switch (button.name)
-		{		
+		{
 			case "ButtonStartServer":
-				
+
 				ServerOutputText.text = "Start Server";
 
 				deviceToSkip = null;
 				deviceToWriteIndex = 0;
 				isServer = true;
-				
+
 				HidePanel();
 
-				Debug.Log("Starting Server: "+privateNetworkName);
-				
+				//	Debug.Log("Starting Server: "+privateNetworkName);
+
+
+
+
+
 				//Start Server
 				OnStartServer.Invoke();
 
 				networking.StartServer(privateNetworkName, (connectedDevice) =>
+				{
+					if (connectedDeviceList == null)
+						connectedDeviceList = new List<Networking.NetworkDevice>();
+
+					if (!connectedDeviceList.Contains(connectedDevice))
 					{
-						if (connectedDeviceList == null)
-							connectedDeviceList = new List<Networking.NetworkDevice>();
+						connectedDeviceList.Add(connectedDevice);
 
-						if (!connectedDeviceList.Contains(connectedDevice))
-						{
-							connectedDeviceList.Add(connectedDevice);
+						//We are connected
+						OnClientConnected.Invoke();
+						HidePanel();
 
-							//We are connected
-							OnClientConnected.Invoke();
-							HidePanel();
+						//	Debug.Log("Client connected");
+					}
+					//Start Server
+					OnStartServer.Invoke();
 
-							Debug.Log("Client connected");
-						}
-						//Start Server
-						OnStartServer.Invoke();
+				}, (disconnectedDevice) =>
+				{
+					if (connectedDeviceList != null && connectedDeviceList.Contains(disconnectedDevice))
+						connectedDeviceList.Remove(disconnectedDevice);
+				}, (dataDevice, characteristic, bytes) =>
+				{
+					deviceToSkip = dataDevice;
+					//We are getting bytes in
+					ReadOutBytes(bytes);
+				});
 
-					}, (disconnectedDevice) =>
-					{
-						if (connectedDeviceList != null && connectedDeviceList.Contains(disconnectedDevice))
-							connectedDeviceList.Remove(disconnectedDevice);
-					}, (dataDevice, characteristic, bytes) =>
-					{
-						deviceToSkip = dataDevice;
-						//We are getting bytes in
-						ReadOutBytes(bytes);
-					});
-				
 				break;
 
 			case "ButtonStartClient":
@@ -202,10 +209,17 @@ public class BluetoothNetworkServer : MonoBehaviour
 					ButtonStopNetwork.SetActive(true);
 					ButtonSendTestData.SetActive(true);
 
+					//Hide Panel
+					HidePanel();
+
 					networking.StartClient(privateNetworkName, clientName, () =>
 					{
 						networking.StatusMessage = "Started advertising";
 						OnStartClient.Invoke();
+
+						//Hide Panel
+						HidePanel();
+
 					}, (clientName, characteristic, bytes) =>
 					{
 						ReadOutBytes(bytes);
@@ -242,7 +256,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 
 			case "ButtonSendTestData":
 				{
-					byte[] bytes = System.Text.Encoding.UTF8.GetBytes("Hello "+ UnityEngine.Random.Range(0, 100) + "from Client:"+isClient);
+					byte[] bytes = System.Text.Encoding.UTF8.GetBytes("Hello " + UnityEngine.Random.Range(0, 100) + "from Client:" + isClient);
 
 					if (isServer)
 					{
@@ -282,17 +296,20 @@ public class BluetoothNetworkServer : MonoBehaviour
 				break;
 		}
 	}
-	private void HidePanel(){
-		gameObject.GetComponent<CanvasGroup>().DOFade(0,0.5f);
+	private void HidePanel()
+	{
+		gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.5f);
 		gameObject.GetComponent<CanvasGroup>().interactable = false;
 		gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
-	}	public void OnOK()
+	}
+	public void OnOK()
 	{
 		BluetoothSettingsDialog.SetActive(false);
 	}
 
 	int count = 0;
-	private void ReadOutBytes(byte[] bytes) {
+	private void ReadOutBytes(byte[] bytes)
+	{
 		ServerOutputText.text = "Getting Bytes in!";
 		String bytesAsString = System.Text.Encoding.UTF8.GetString(bytes);
 		ServerOutputText.text = bytesAsString;
@@ -303,15 +320,16 @@ public class BluetoothNetworkServer : MonoBehaviour
 		if (data.Length < 1) return;
 
 		if (data[0] == "index")
-        {
-			int targetIndex = System.Convert.ToInt32(data[1]); 
+		{
+			int targetIndex = System.Convert.ToInt32(data[1]);
 			OnChangeScreenIndex.Invoke(targetIndex, true);
-        } else if (data[0] == "gyro")
-        {
+		}
+		else if (data[0] == "gyro")
+		{
 			//gyro_x,y,z,w
 			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s));
-            OnChangeGyro.Invoke(transform);
-        }
+			OnChangeGyro.Invoke(transform);
+		}
 		else if (data[0] == "accel")
 		{
 			//accel_0 - Left
@@ -332,60 +350,53 @@ public class BluetoothNetworkServer : MonoBehaviour
 			});
 		}
 	}
+	public void SendServerMessage(string message)
+	{
 
-	public void HandleSceenIndexChange(int targetIndex)
-    {
-		string message = "index_" + targetIndex.ToString();
-		SendServerMessage(message);
-	}
+		Debug.Log("Message" + message);
 
-	public void SendServerMessage(string message){
-
-		//Debug.Log("Message" + message);
-		
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message);
-			if (isServer)
+		if (isServer)
+		{
+
+			//debugMessage.text = "Message is Server" + message;
+
+			if (connectedDeviceList != null)
 			{
-				
-				//debugMessage.text = "Message is Server" + message;
-				
-				if (connectedDeviceList != null)
+
+				if (connectedDeviceList.Count == 1)
 				{
-					
-					if (connectedDeviceList.Count == 1)
+
+					if (deviceToSkip == null)
 					{
-						
-						if (deviceToSkip == null)
+
+						networking.WriteDevice(connectedDeviceList[0], bytes, () =>
 						{
-							
-							networking.WriteDevice(connectedDeviceList[0], bytes, () =>
-							{
-								//we are sending data in our channel
-								
-							});
-						}
-						else
-						{
-							deviceToSkip = null;
-							//we are not writing in our channel
-						}
+							//we are sending data in our channel
+
+						});
 					}
 					else
 					{
-						deviceToWriteIndex = 0;
-						writeDeviceBytes = true;
-						bytesToWrite = bytes;
+						deviceToSkip = null;
+						//we are not writing in our channel
 					}
 				}
-				else if (deviceToSkip != null)
-					deviceToSkip = null;
+				else
+				{
+					deviceToWriteIndex = 0;
+					writeDeviceBytes = true;
+					bytesToWrite = bytes;
+				}
 			}
-			else
-			{
-				
-				//sending out test data
-				networking.SendFromClient(bytes);
-			}
+			else if (deviceToSkip != null)
+				deviceToSkip = null;
+		}
+		else
+		{
+			//sending out test data
+			networking.SendFromClient(bytes);
+		}
 	}
 	List<string> bluetoothErrors = new List<string>
 	{
@@ -395,8 +406,9 @@ public class BluetoothNetworkServer : MonoBehaviour
 		"Bluetooth LE Not Supported",
 	};
 
-	public void SetNetworkChannel(int index) {
+	public void SetNetworkChannel(int index)
+	{
 		privateNetworkName = networkName + index;
-		Debug.Log("Network Name: "+privateNetworkName);
+		Debug.Log("Network Name: " + privateNetworkName);
 	}
 }
