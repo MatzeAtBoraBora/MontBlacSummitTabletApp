@@ -15,7 +15,8 @@ public class AnimationSytemController : MonoBehaviour
 	public class IndexEvent : UnityEvent<int>
 	{
 	}
-	public IndexEvent onIndexChanged;
+	public IndexEvent onIndexChangedNetwork;
+	public IndexEvent onIndexChangedLocal;
 
     private AnimationPanelController[] animatedPanels;
     private int currentIndex = -1;
@@ -70,8 +71,9 @@ public class AnimationSytemController : MonoBehaviour
         if (targetIndex == currentIndex)
             return;
 
+        onIndexChangedLocal.Invoke(targetIndex);
         // only send bluetooth if the change was triggered in this device
-        if (!isFromNetwork) onIndexChanged.Invoke(targetIndex);
+        if (!isFromNetwork) onIndexChangedNetwork.Invoke(targetIndex);
 
         var tasks = new List<Task>();
         int _currentChapterIndex = -1; // will turn 0 on first loop run
