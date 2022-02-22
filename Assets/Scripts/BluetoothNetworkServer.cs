@@ -5,7 +5,6 @@ using Shatalmic;
 using System;
 using UnityEngine.Events;
 using DG.Tweening;
-
 public class BluetoothNetworkServer : MonoBehaviour
 {
 	/* External UI attributes */
@@ -37,8 +36,6 @@ public class BluetoothNetworkServer : MonoBehaviour
 	public UnityEvent OnStartServer;
 	public UnityEvent OnStartClient;
 	public UnityEvent OnClientConnected;
-
-
 
 	public UnityEvent<String> OnMessageReceived;
 	public UnityEvent<int, bool> OnChangeScreenIndex;
@@ -154,11 +151,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 
 				HidePanel();
 
-				//	Debug.Log("Starting Server: "+privateNetworkName);
-
-
-
-
+				Debug.Log("Starting Server: " + privateNetworkName);
 
 				//Start Server
 				OnStartServer.Invoke();
@@ -176,7 +169,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 						OnClientConnected.Invoke();
 						HidePanel();
 
-						//	Debug.Log("Client connected");
+						Debug.Log("Client connected");
 					}
 					//Start Server
 					OnStartServer.Invoke();
@@ -206,20 +199,13 @@ public class BluetoothNetworkServer : MonoBehaviour
 					isServer = false;
 					ButtonStartServer.SetActive(false);
 					ButtonStartClient.SetActive(false);
-					ButtonStopNetwork.SetActive(true);
-					ButtonSendTestData.SetActive(true);
-
-					//Hide Panel
+					//ButtonStopNetwork.SetActive(true);
+					//ButtonSendTestData.SetActive(true);
 					HidePanel();
-
 					networking.StartClient(privateNetworkName, clientName, () =>
 					{
 						networking.StatusMessage = "Started advertising";
 						OnStartClient.Invoke();
-
-						//Hide Panel
-						HidePanel();
-
 					}, (clientName, characteristic, bytes) =>
 					{
 						ReadOutBytes(bytes);
@@ -350,10 +336,17 @@ public class BluetoothNetworkServer : MonoBehaviour
 			});
 		}
 	}
+
+	public void HandleSceenIndexChange(int targetIndex)
+	{
+		string message = "index_" + targetIndex.ToString();
+		SendServerMessage(message);
+	}
+
 	public void SendServerMessage(string message)
 	{
 
-		Debug.Log("Message" + message);
+		//Debug.Log("Message" + message);
 
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message);
 		if (isServer)
@@ -394,6 +387,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 		}
 		else
 		{
+
 			//sending out test data
 			networking.SendFromClient(bytes);
 		}
