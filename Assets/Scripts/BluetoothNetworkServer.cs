@@ -332,9 +332,16 @@ public class BluetoothNetworkServer : MonoBehaviour
 			});
 		}
 	}
+
+	public void HandleSceenIndexChange(int targetIndex)
+    {
+		string message = "index_" + targetIndex.ToString();
+		SendServerMessage(message);
+	}
+
 	public void SendServerMessage(string message){
 
-		Debug.Log("Message" + message);
+		//Debug.Log("Message" + message);
 		
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(message);
 			if (isServer)
