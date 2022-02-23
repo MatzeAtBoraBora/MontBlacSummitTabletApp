@@ -5,6 +5,8 @@ using Shatalmic;
 using System;
 using UnityEngine.Events;
 using DG.Tweening;
+using System.Globalization;
+
 public class BluetoothNetworkServer : MonoBehaviour
 {
 	/* External UI attributes */
@@ -313,7 +315,9 @@ public class BluetoothNetworkServer : MonoBehaviour
 		else if (data[0] == "gyro")
 		{
 			//gyro_x,y,z,w
-			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s, System.Globalization.NumberStyles.AllowDecimalPoint | System.Globalization.NumberStyles.AllowLeadingSign));
+			var ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+			ci.NumberFormat.NumberDecimalSeparator = ".";
+			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign));
 			OnChangeGyro.Invoke(transform);
 		}
 		else if (data[0] == "accel")
