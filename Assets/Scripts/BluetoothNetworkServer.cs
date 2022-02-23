@@ -313,7 +313,7 @@ public class BluetoothNetworkServer : MonoBehaviour
 		else if (data[0] == "gyro")
 		{
 			//gyro_x,y,z,w
-			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s));
+			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s, System.Globalization.NumberStyles.AllowDecimalPoint | System.Globalization.NumberStyles.AllowLeadingSign));
 			OnChangeGyro.Invoke(transform);
 		}
 		else if (data[0] == "accel")
