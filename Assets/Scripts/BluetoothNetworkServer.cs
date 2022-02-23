@@ -314,10 +314,11 @@ public class BluetoothNetworkServer : MonoBehaviour
 		}
 		else if (data[0] == "gyro")
 		{
-			//gyro_x,y,z,w
+			//gyro_x,y
 			var ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
 			ci.NumberFormat.NumberDecimalSeparator = ".";
-			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign));
+
+			float[] transform = Array.ConvertAll(data[1].Split(','), s => float.Parse(s, ci));
 			OnChangeGyro.Invoke(transform);
 		}
 		else if (data[0] == "accel")
